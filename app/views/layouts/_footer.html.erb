@@ -1,0 +1,23 @@
+<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text"><%= t('.tech_university') %></h5>
+        <p class="grey-text text-lighten-4"><%= t('.tech_university_desc') %>.</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text"><%= t('.information') %></h5>
+        <ul>
+          <li><%= link_to t('.help'), help_path, class: "grey-text text-lighten-3" %></li>
+          <li><%= link_to t('.about'), about_path, class: "grey-text text-lighten-3" %></li>
+          <li><%= link_to t('.contact_us'), contact_us_path, class: "grey-text text-lighten-3" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      <div class="grey-text text-lighten-4 right">&copy; <%= Time.current.year %> <%= t('.tech_university_copy') %></div>
+    </div>
+  </div>
+</footer>

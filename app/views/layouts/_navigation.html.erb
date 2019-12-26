@@ -1,0 +1,37 @@
+<header>
+  <ul id="dropdown1" class="dropdown-content">
+    <% if logged_in? %>
+      <li><%= link_to t('.your_profile'), student_path(current_user) %></li>
+      <li><%= link_to t('.edit_profile'), edit_student_path(current_user) %></li>
+      <li class="divider"></li>
+    <% end %>
+    <li><%= session_link %></li>
+  </ul>
+  <nav>
+    <div class="container">
+      <div class="nav-wrapper">
+        <%= link_to t('.tech_university'), root_path, class: "brand-logo" %>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><%= link_to t('.courses'), root_path %></li>
+          <% if logged_in? %>
+            <li><%= link_to t('.students'), students_path %></li>
+          <% end %>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><%= t('.account') %><i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <% flash.each do |key, message| %>
+    <div class="container">
+      <div class="row sign-up-form">
+        <div class="col s12 m12 l12">
+          <div class="card-panel red lighten-2" id="fade-out-target">
+            <span class="white-text">
+              <%= message %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</header>

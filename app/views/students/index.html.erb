@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col s12">
+    <h3 class="center-align"><%= t('.students_directory') %></h3>
+  </div>
+</div>
+
+<div class="row">
+  <% @students.each do |student| %>
+    <%= content_tag :div, class: "col s6 m6", data: { qa: student.id } do %>
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title"><%= student.name %></span>
+          <p><%= student.email %></p>
+          <% if student.courses.count > 0 %>
+            <p><%= t('.course_enrollments') %>:  <%= student.courses.count %></p>
+          <% else %>
+            <p><%= t('.course_enrollments') %>: <%= t('.none') %></p>
+          <% end %>
+        </div>
+        <div class="card-action">
+          <%= link_to t('.view_profile'), student_path(student) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,134 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  layouts:
+    navigation:
+      tech_university: Tech University
+      courses: Courses
+      account: Account
+      log_in: Log In
+      log_out: Log Out
+      your_profile: Your Profile
+      edit_profile: Edit Profile
+      students: Students
+    footer:
+      tech_university: Tech University
+      tech_university_desc: The future of development training
+      information: Information
+      help: Help
+      about: About
+      contact_us: Contact Us
+      tech_university_copy: Tech University
+  courses:
+    index:
+      course_listings: Course Listings
+      course_name: Course name
+      course_id: Course ID
+      info: Info
+      enroll: Enroll
+    new:
+      create_new_course: Create New Course
+      enter_course_name: Enter course name
+      enter_course_short_name: Enter course short name
+      enter_course_description: Enter course description
+      create_course_button: Create Course
+    show:
+      description: Description
+  logins:
+    new:
+      log_in_title: Log In
+      enter_your_email_address: Enter your email address
+      enter_your_password: Enter your password
+      log_in_button: Log In
+    create:
+      success_log_in: You have successfully logged in
+      something_was_wrong: Something was wrong with your login information
+    destroy:
+      success_log_out: You have successfully logged out
+  pages:
+    about:
+      about_title: This is the About page
+      about_desc: Additional information is here.
+    contact_us:
+      contact_us_title: This is the Contact Us page
+      contact_us_desc: Additional information is here.
+    help:
+      help_title: This is the Help page
+      help_desc: Additional information is here.
+  students:
+    form:
+      sign_up_title: Sign Up!
+      edit_your_profile_title: Edit Your Profile
+      enter_your_full_name: Enter your full name
+      enter_your_full_address: Enter your full address
+      choose_a_password: Choose a password
+      confirm_your_password: Confirm your password
+      submit_updates: Submit Updates
+    index:
+      students_directory: Students Directory
+      name: Name
+      email: Email
+      course_enrollments: Course Enrollments
+      none: None
+      view_profile: View Profile
+    show:
+      name: Name
+      email: Email
+      edit_your_profile: Edit Your Profile
+      course_enrollments: Course Enrollments
+      none: None
+    update:
+      success_updated_profile: You have successfully updated your profile
+    edit:
+      edit_own_profile: You can only edit your own profile
+    create:
+      success_sign_up: You have successfully signed up!
+  success_create: "You have successfully create %{course_name}!"
+  success_enroll: "You have successfully enrolled in %{course_name}"
+  errors:
+    course:
+      name_is_blank: Name can't be blank
+      name_too_short: Name is too short (minimum is 5 characters)
+      name_too_long: Name is too long (maximum is 50 characters)
+      short_name_is_blank: Short name can't be blank
+      short_name_too_short: Short name is too short (minimum is 3 characters)
+      short_name_too_long: Short name is too long (maximum is 15 characters)
+      desc_is_blank: Description can't be blank
+      desc_too_short: Description is too short (minimum is 10 characters)
+      desc_too_long: Description is too long (maximum is 300 characters)
+    student:
+      name_is_blank: Name can't be blank
+      name_too_short: Name is too short (minimum is 5 characters)
+      name_too_long: Name is too long (maximum is 50 characters)
+      email_is_blank: Email can't be blank
+      invalid_email: Email is invalid
+      pass_does_not_match: Password confirmation doesn't match Password

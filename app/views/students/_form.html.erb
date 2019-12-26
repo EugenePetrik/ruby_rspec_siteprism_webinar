@@ -1,0 +1,50 @@
+<%= render 'shared/errors', obj: @student %>
+
+<div class="container">
+  <div class="row center sign-up-form">
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
+        <h3 class="header"><%= @student.new_record? ? t('.sign_up_title') : t('.edit_your_profile_title') %></h3>
+        <div class="row">
+          <%= form_for(@student, html: { class: "col s12" }) do |f| %>
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.text_field :name, placeholder:  t('.enter_your_full_name'), autofocus: true %>
+                <%= f.label :name, class: 'active' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.email_field :email, placeholder: t('.enter_your_full_address') %>
+                <%= f.label :email, class: 'active' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.password_field :password, placeholder: t('.choose_a_password') %>
+                <%= f.label :password, class: 'active' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.password_field :password_confirmation, placeholder: t('.confirm_your_password') %>
+                <%= f.label :password_confirmation, class: 'active' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.button(@student.new_record? ? "<i class=\"material-icons right\">arrow_forward</i>#{t('.sign_up_title')}".html_safe :
+                    "<i class=\"material-icons right\">arrow_forward</i>#{t('.submit_updates')}".html_safe,
+                    class: "btn orange waves-effect waves-light right") %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
