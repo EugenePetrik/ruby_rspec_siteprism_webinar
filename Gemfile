@@ -75,7 +75,7 @@ group :test do
   gem 'simplecov', '~> 0.17.1'
   # https://github.com/site-prism/site_prism
   gem 'site_prism', '~> 3.4', '>= 3.4.1'
-  # RSpec testing framework
+  # https://github.com/rspec/rspec-rails
   gem 'rspec-rails', '~> 3.9'
   # https://github.com/rubocop-hq/rubocop-performance
   gem 'rubocop-performance', '~> 1.5', '>= 1.5.1'
