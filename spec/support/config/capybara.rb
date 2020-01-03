@@ -41,14 +41,27 @@ Capybara.configure do |config|
   config.server_port = 54_321
 end
 
+Capybara::Screenshot.prune_strategy = { keep: 20 }
+
+Capybara::Screenshot.register_driver(:chrome) do |driver, path|
+  driver.browser.save_screenshot(path)
+end
+
+Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
+  meta = example.metadata
+  filename = File.basename(meta[:file_path])
+  line_number = meta[:line_number]
+  "screenshot_#{filename}-#{line_number}"
+end
+
 RSpec.configure do |config|
-  config.before(type: :feature) do
+  config.append_before(:each, type: :feature) do
     Capybara.reset_session!
     Capybara.execute_script 'try { localStorage.clear() } catch(err) { }'
     Capybara.execute_script 'try { sessionStorage.clear() } catch(err) { }'
   end
 
-  config.after(:suite) do
+  config.append_after(:suite, type: :feature) do
     browser_errors = Capybara.page.driver.browser.manage.logs.get(:browser)
     client_errors = Capybara.page.driver.browser.manage.logs.get(:client)
     driver_errors = Capybara.page.driver.browser.manage.logs.get(:driver)
