@@ -174,10 +174,12 @@ rspec spec/feature/tags_spec.rb --tag smoke
 
 #### Useful links
 
-[Site Prism](https://github.com/site-prism/site_prism)
+[Site Prism gem](https://github.com/site-prism/site_prism)
 
-[Capybara Cheatsheet](https://gist.github.com/tomas-stefano/6652111)
+[Capybara Cheatsheet #1](https://gist.github.com/tomas-stefano/6652111)
 
-[Ruby Capybara With Selenium Cheat Sheat](https://blog.morizyun.com/blog/capybara-selenium-webdriver-ruby/index.html)
+[Capybara Cheatsheet #2](https://blog.morizyun.com/blog/capybara-selenium-webdriver-ruby/index.html)
 
 [Rubocop Tests Naming](https://github.com/rubocop-hq/rspec-style-guide#naming)
+
+[Faker Generators](https://github.com/faker-ruby/faker#generators)

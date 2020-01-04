@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.configure do |config|
-  config.include(FactoryBot::Syntax::Methods)
+  # Configure your test suite
+  config.include FactoryBot::Syntax::Methods
 end

@@ -7,7 +7,7 @@ RSpec.configure do |config|
   end
 
   config.before do
-    # Sets the default database cleanjing strategy to be transactions
+    # Sets the default database cleaning strategy to be transactions
     DatabaseCleaner.strategy = :transaction
   end
 
@@ -17,12 +17,12 @@ RSpec.configure do |config|
   end
 
   config.before do
-    # Hook up database_cleaner around the beginning of each test
+    # Usually this is called in setup of a test
     DatabaseCleaner.start
   end
 
   config.append_after do
-    # Hook up database_cleaner around the end of each test
+    # Cleanup of the test
     DatabaseCleaner.clean
   end
 end
