@@ -4,6 +4,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'selenium-webdriver'
+require 'site_prism'
 
 # Capybara drivers - https://github.com/teamcapybara/capybara#drivers.
 
