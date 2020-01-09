@@ -106,8 +106,8 @@ RSpec.configure do |config|
     Dir.mkdir('tmp/logs') unless Dir.exist?('tmp/logs')
 
     # Save logs to file
-    open('tmp/logs/browser.log', 'w') { |f| f <<  browser_logs }
-    open('tmp/logs/client.log', 'w') { |f| f <<  client_logs }
+    open('tmp/logs/browser.log', 'w') { |f| f << browser_logs }
+    open('tmp/logs/client.log', 'w') { |f| f << client_logs }
     open('tmp/logs/driver.log', 'w') { |f| f << driver_logs }
     open('tmp/logs/server.log', 'w') { |f| f << server_logs }
   end
