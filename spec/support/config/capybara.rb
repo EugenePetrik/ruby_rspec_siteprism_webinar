@@ -4,7 +4,6 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'selenium-webdriver'
-require 'site_prism'
 
 # Capybara drivers - https://github.com/teamcapybara/capybara#drivers.
 
@@ -13,12 +12,11 @@ Capybara.register_driver(:chrome) do |app|
   # https://selenium.dev/selenium/docs/api/rb/Selenium/WebDriver/Remote/Capabilities.html
   CAPABILITIES = Selenium::WebDriver::Remote::Capabilities.chrome(
     # Preferences for logging - https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities.
+    # Logging Prefs: "browser", "driver", "client", "server".
     # Loggers Values: "OFF", "SEVERE", "WARNING", "INFO", "CONFIG", "FINE", "FINER", "FINEST", "ALL".
     loggingPrefs: {
       browser: 'ALL',
-      client: 'ALL',
-      driver: 'ALL',
-      server: 'ALL'
+      driver: 'ALL'
     }
   )
 
@@ -95,20 +93,16 @@ RSpec.configure do |config|
   end
 
   # Save browser, client, driver, and server logs
-  config.append_after(:suite, type: :feature) do
+  config.append_after(:suite) do
     # Gather logs
     browser_logs = Capybara.page.driver.browser.manage.logs.get(:browser)
-    client_logs = Capybara.page.driver.browser.manage.logs.get(:client)
     driver_logs = Capybara.page.driver.browser.manage.logs.get(:driver)
-    server_logs = Capybara.page.driver.browser.manage.logs.get(:server)
 
     # Create tmp/logs folder if it does not exist
     Dir.mkdir('tmp/logs') unless Dir.exist?('tmp/logs')
 
     # Save logs to file
     open('tmp/logs/browser.log', 'w') { |f| f << browser_logs }
-    open('tmp/logs/client.log', 'w') { |f| f << client_logs }
     open('tmp/logs/driver.log', 'w') { |f| f << driver_logs }
-    open('tmp/logs/server.log', 'w') { |f| f << server_logs }
   end
 end

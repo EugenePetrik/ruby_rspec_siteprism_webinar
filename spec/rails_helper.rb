@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+require 'database_cleaner'
+require 'site_prism'
 require 'spec_helper'
 require 'rspec/rails'
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path('../config/environment', __dir__)
-require File.expand_path('support/pages/general_page', __dir__)
-
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
+
+# Load site prism page objects
+require File.expand_path('support/pages/base_page', __dir__)
 
 # Load modules under the spec/support directory
 Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
