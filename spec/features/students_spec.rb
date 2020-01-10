@@ -68,7 +68,7 @@ RSpec.describe 'Students page', type: :feature do
   context 'when open own student profile page' do
     it 'Edit Profile button is displayed' do
       students_page.open_student_profile_for(student1.id)
-     
+
       expect(view_profile_page).to have_edit_profile_button
     end
   end
