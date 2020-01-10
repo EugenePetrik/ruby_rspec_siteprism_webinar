@@ -27,7 +27,7 @@ RSpec.describe 'Students page', type: :feature do
     it { expect(students_page).to be_footer_visible }
 
     it 'the number of students equal 3' do
-      expect(students_page.student_cards.size).to eq 3
+      expect(students_page.student_cards.size).to eq(3)
     end
 
     it 'student ids match' do
@@ -46,9 +46,9 @@ RSpec.describe 'Students page', type: :feature do
       students_page.open_student_profile_for(student3.id)
 
       expect(view_profile_page).to be_displayed(student_id: student3.id)
-      expect(view_profile_page.user_name.text).to eq student3.name
-      expect(view_profile_page.user_email.text).to eq student3.email
-      expect(view_profile_page.course_links.size).to eq 0
+      expect(view_profile_page.user_name.text).to eq(student3.name)
+      expect(view_profile_page.user_email.text).to eq(student3.email)
+      expect(view_profile_page.course_links.size).to eq(0)
 
       # expect(view_profile_page).to have_content('None'))
       expect(view_profile_page).to have_content(I18n.t('students.show.none'))
@@ -59,7 +59,7 @@ RSpec.describe 'Students page', type: :feature do
     it 'courses are displayed' do
       students_page.open_student_profile_for(student1.id)
 
-      expect(view_profile_page.course_links.size).to eq 3
+      expect(view_profile_page.course_links.size).to eq(3)
       expect(view_profile_page.course_links.map(&:text))
         .to match_array([course1.name, course3.name, course4.name])
     end

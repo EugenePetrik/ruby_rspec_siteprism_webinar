@@ -18,15 +18,15 @@ RSpec.describe 'View Profile page' do
     it { expect(view_profile_page).to be_footer_visible }
 
     it 'student name is displayed' do
-      expect(view_profile_page.user_name.text).to eq student.name
+      expect(view_profile_page.user_name.text).to eq(student.name)
     end
 
     it 'student email is displayed' do
-      expect(view_profile_page.user_email.text).to eq student.email
+      expect(view_profile_page.user_email.text).to eq(student.email)
     end
 
     it 'course links are displayed' do
-      expect(view_profile_page.course_links.size).to eq 3
+      expect(view_profile_page.course_links.size).to eq(3)
     end
 
     it 'course names match' do

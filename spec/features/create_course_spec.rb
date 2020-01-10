@@ -34,8 +34,8 @@ RSpec.describe 'Create Course page' do
       course_description = course[:description]
 
       expect(view_course_page.flash_message.text).to eq(I18n.t('success_create', course_name: course_name))
-      expect(view_course_page.course_title.text).to eq course_name
-      expect(view_course_page.course_description.text).to eq course_description
+      expect(view_course_page.course_title.text).to eq(course_name)
+      expect(view_course_page.course_description.text).to eq(course_description)
     end
 
     it 'creates the record in the database' do
@@ -56,7 +56,6 @@ RSpec.describe 'Create Course page' do
 
     it 'raises an error' do
       create_course_page.create_course_with(empty_course_name)
-      # create_course_page.create_course_with(name: '', short_name: short_name, description: description)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.name_is_blank'))
       expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))

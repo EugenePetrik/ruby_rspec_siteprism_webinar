@@ -64,10 +64,8 @@ RSpec.describe 'Home page' do
 
       expect(view_course_page).to be_displayed
       expect(view_course_page).to be_all_there
-      expect(view_course_page.course_title.text).to eq course[0].name
-      expect(view_course_page.course_description.text).to eq course[0].description
-      expect(view_course_page).to be_nav_bar_login_user_visible
-      expect(view_course_page).to be_footer_visible
+      expect(view_course_page.course_title.text).to eq(course[0].name)
+      expect(view_course_page.course_description.text).to eq(course[0].description)
     end
   end
 end
