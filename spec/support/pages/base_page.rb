@@ -21,6 +21,9 @@ class BasePage < SitePrism::Page
   element :contact_us, 'a[href="/contact_us"]'
   element :copyright, 'div.grey-text'
 
+  # Flash messages
+  element :flash_message, 'span.white-text'
+
   def nav_bar_visible?
     all_visible?(:brand_title, :courses)
   end
