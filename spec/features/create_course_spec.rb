@@ -5,6 +5,7 @@ RSpec.describe 'Create Course page' do
   let(:create_course_page) { CreateCoursePage.new }
 
   let(:student) { create(:student) }
+
   let(:name) { Faker::Educator.course_name }
   let(:short_name) { Faker::Lorem.characters(number: (3..15)).upcase }
   let(:description) { Faker::Lorem.paragraph_by_chars(number: rand(10..300)) }
@@ -45,8 +46,17 @@ RSpec.describe 'Create Course page' do
   end
 
   context 'with empty course name' do
+    let(:empty_course_name) do
+      {
+        name: '',
+        short_name: short_name,
+        description: description
+      }
+    end
+
     it 'raises an error' do
-      create_course_page.create_course_with(name: '', short_name: short_name, description: description)
+      create_course_page.create_course_with(empty_course_name)
+      # create_course_page.create_course_with(name: '', short_name: short_name, description: description)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.name_is_blank'))
       expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))
@@ -54,28 +64,48 @@ RSpec.describe 'Create Course page' do
   end
 
   context 'with too short course name' do
-    let(:name) { Faker::Lorem.characters(number: rand(1..4)).upcase }
+    let(:short_course_name) do
+      {
+        name: Faker::Lorem.characters(number: rand(1..4)).upcase,
+        short_name: short_name,
+        description: description
+      }
+    end
 
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: short_name, description: description)
+      create_course_page.create_course_with(short_course_name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))
     end
   end
 
   context 'with too long course name' do
-    let(:name) { Faker::Lorem.characters(number: rand(51..100)).upcase }
+    let(:long_course_name) do
+      {
+        name: Faker::Lorem.characters(number: rand(51..100)).upcase,
+        short_name: short_name,
+        description: description
+      }
+    end
 
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: short_name, description: description)
+      create_course_page.create_course_with(long_course_name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.name_too_long'))
     end
   end
 
   context 'with empty course short name' do
+    let(:empty_course_short_name) do
+      {
+        name: name,
+        short_name: '',
+        description: description
+      }
+    end
+
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: '', description: description)
+      create_course_page.create_course_with(empty_course_short_name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.short_name_is_blank'))
       expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_short'))
@@ -83,28 +113,48 @@ RSpec.describe 'Create Course page' do
   end
 
   context 'with too short course short name' do
-    let(:short_name) { Faker::Lorem.characters(number: rand(1..2)).upcase }
+    let(:short_course_short_name) do
+      {
+        name: name,
+        short_name: Faker::Lorem.characters(number: rand(1..2)).upcase,
+        description: description
+      }
+    end
 
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: short_name, description: description)
+      create_course_page.create_course_with(short_course_short_name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_short'))
     end
   end
 
   context 'with too long course short name' do
-    let(:short_name) { Faker::Lorem.characters(number: rand(16..30)).upcase }
+    let(:long_course_short_name) do
+      {
+        name: name,
+        short_name: Faker::Lorem.characters(number: rand(16..30)).upcase,
+        description: description
+      }
+    end
 
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: short_name, description: description)
+      create_course_page.create_course_with(long_course_short_name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_long'))
     end
   end
 
   context 'with empty course description' do
+    let(:empty_course_description) do
+      {
+        name: name,
+        short_name: short_name,
+        description: ''
+      }
+    end
+
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: short_name, description: '')
+      create_course_page.create_course_with(empty_course_description)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.desc_is_blank'))
       expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_short'))
@@ -112,20 +162,32 @@ RSpec.describe 'Create Course page' do
   end
 
   context 'with too short course description' do
-    let(:description) { Faker::Lorem.paragraph_by_chars(number: rand(1..9)) }
+    let(:short_course_description) do
+      {
+        name: name,
+        short_name: short_name,
+        description: Faker::Lorem.paragraph_by_chars(number: rand(1..9))
+      }
+    end
 
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: short_name, description: description)
+      create_course_page.create_course_with(short_course_description)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_short'))
     end
   end
 
   context 'with too long course description' do
-    let(:description) { Faker::Lorem.paragraph_by_chars(number: rand(301..350)) }
+    let(:long_course_description) do
+      {
+        name: name,
+        short_name: short_name,
+        description: Faker::Lorem.paragraph_by_chars(number: rand(301..350))
+      }
+    end
 
     it 'raises an error' do
-      create_course_page.create_course_with(name: name, short_name: short_name, description: description)
+      create_course_page.create_course_with(long_course_description)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_long'))
     end
