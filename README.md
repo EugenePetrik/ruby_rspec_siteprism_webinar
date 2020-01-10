@@ -183,3 +183,5 @@ rspec spec/feature/tags_spec.rb --tag smoke
 [Rubocop Tests Naming](https://github.com/rubocop-hq/rspec-style-guide#naming)
 
 [Faker Generators](https://github.com/faker-ruby/faker#generators)
+
+[Fuubar RSpec Formatter](https://github.com/thekompanee/fuubar)
