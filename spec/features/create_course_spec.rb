@@ -16,14 +16,14 @@ RSpec.describe 'Create Course page' do
     create_course_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', :smoke do
     it { expect(create_course_page).to be_displayed }
     it { expect(create_course_page).to be_all_there }
     it { expect(create_course_page).to be_nav_bar_login_user_visible }
     it { expect(create_course_page).to be_footer_visible }
   end
 
-  context 'with valid data' do
+  context 'with valid data', :smoke do
     let(:view_course_page) { ViewCoursePage.new }
     let(:course) { attributes_for(:course) }
 

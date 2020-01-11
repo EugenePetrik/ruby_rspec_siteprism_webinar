@@ -11,7 +11,7 @@ RSpec.describe 'About page' do
     about_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', :smoke do
     it { expect(about_page).to be_displayed }
     it { expect(about_page).to be_all_there }
     it { expect(about_page).to be_nav_bar_login_user_visible }

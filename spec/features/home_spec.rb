@@ -13,7 +13,7 @@ RSpec.describe 'Home page' do
     home_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', :smoke do
     it { expect(home_page).to be_displayed }
     it { expect(home_page).to be_all_there }
     it { expect(home_page).to be_nav_bar_login_user_visible }
@@ -39,7 +39,7 @@ RSpec.describe 'Home page' do
     end
   end
 
-  context 'when click to enroll link' do
+  context 'when click to enroll link', :smoke do
     let(:view_profile_page) { ViewProfilePage.new }
 
     it 'course enrolled' do
@@ -56,7 +56,7 @@ RSpec.describe 'Home page' do
     end
   end
 
-  context 'when click to course info link' do
+  context 'when click to course info link', :smoke do
     let(:view_course_page) { ViewCoursePage.new }
 
     it 'course info page displayes' do

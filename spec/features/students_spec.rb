@@ -20,7 +20,7 @@ RSpec.describe 'Students page', type: :feature do
     students_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', :smoke do
     it { expect(students_page).to be_displayed }
     it { expect(students_page).to be_all_there }
     it { expect(students_page).to be_nav_bar_login_user_visible }
@@ -42,21 +42,19 @@ RSpec.describe 'Students page', type: :feature do
   end
 
   context 'when open profile page for student without courses' do
-    it 'courses are not displayed' do
+    it 'courses are not displayed', :smoke do
       students_page.open_student_profile_for(student3.id)
 
       expect(view_profile_page).to be_displayed(student_id: student3.id)
       expect(view_profile_page.user_name.text).to eq(student3.name)
       expect(view_profile_page.user_email.text).to eq(student3.email)
       expect(view_profile_page.course_links.size).to eq(0)
-
-      # expect(view_profile_page).to have_content('None'))
       expect(view_profile_page).to have_content(I18n.t('students.show.none'))
     end
   end
 
   context 'when open profile page for student with courses' do
-    it 'courses are displayed' do
+    it 'courses are displayed', :smoke do
       students_page.open_student_profile_for(student1.id)
 
       expect(view_profile_page.course_links.size).to eq(3)
@@ -66,7 +64,7 @@ RSpec.describe 'Students page', type: :feature do
   end
 
   context 'when open own student profile page' do
-    it 'Edit Profile button is displayed' do
+    it 'Edit Profile button is displayed', :smoke do
       students_page.open_student_profile_for(student1.id)
 
       expect(view_profile_page).to have_edit_profile_button
@@ -74,7 +72,7 @@ RSpec.describe 'Students page', type: :feature do
   end
 
   context 'when open profile page for another student' do
-    it 'Edit Profile button is not displayed' do
+    it 'Edit Profile button is not displayed', :smoke do
       students_page.open_student_profile_for(student2.id)
 
       expect(view_profile_page).to have_no_edit_profile_button

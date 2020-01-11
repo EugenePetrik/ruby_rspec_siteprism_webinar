@@ -16,7 +16,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
     edit_profile_page.load(student_id: student.id)
   end
 
-  context 'when open page' do
+  context 'when open page', :smoke do
     it { expect(edit_profile_page).to be_displayed(student_id: student.id) }
     it { expect(edit_profile_page).to be_all_there }
     it { expect(edit_profile_page).to be_nav_bar_login_user_visible }
@@ -34,7 +34,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
       }
     end
 
-    it 'profile saved' do
+    it 'profile saved', :smoke do
       edit_profile_page.edit_profile_with(params_user_data)
 
       expect(view_profile_page).to be_displayed(student_id: student.id)
@@ -48,7 +48,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
   context 'without editing password' do
     let(:params_user_data) { attributes_for(:student) }
 
-    it 'profile saved' do
+    it 'profile saved', :smoke do
       edit_profile_page.edit_profile_with(params_user_data)
 
       expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))

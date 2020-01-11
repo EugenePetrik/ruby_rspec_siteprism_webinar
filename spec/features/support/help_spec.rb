@@ -11,7 +11,7 @@ RSpec.describe 'Help page' do
     help_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', :smoke do
     it { expect(help_page).to be_displayed }
     it { expect(help_page).to be_all_there }
     it { expect(help_page).to be_nav_bar_login_user_visible }

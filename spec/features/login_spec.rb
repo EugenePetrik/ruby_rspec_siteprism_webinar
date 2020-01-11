@@ -8,14 +8,14 @@ RSpec.describe 'Login page' do
 
   before { login_page.load }
 
-  context 'when open page' do
+  context 'when open page', :smoke do
     it { expect(login_page).to be_displayed }
     it { expect(login_page).to be_all_there }
     it { expect(login_page).to be_nav_bar_visible }
     it { expect(login_page).to be_footer_visible }
   end
 
-  context 'with correct email and password' do
+  context 'with correct email and password', :smoke do
     let(:view_profile_page) { ViewProfilePage.new }
 
     it 'student logs in' do
