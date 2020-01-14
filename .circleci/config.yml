@@ -1,0 +1,118 @@
+version: 2.1
+
+executors:
+  default:
+    working_directory: ~/univ_app
+    description: The official CircleCI Ruby Docker image
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:11.3-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+
+caches: 
+  - &bundle_cache v1-repo-{{ checksum "Gemfile.lock" }}
+
+commands:
+  setup_gems:
+    description: Setup bundler and other gems
+    steps:
+      - restore_cache:
+          keys:
+            - *full_gem_cache
+            - *gem_cache
+      - run:
+          name: Install Bundler
+          command: gem install bundler
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - save_cache:
+          key: *full_gem_cache
+          paths:
+            - ~/univ_app/vendor/bundle
+
+  setup_databases:
+    steps:
+      - run:
+          name: Install postgresql client
+          shell: /bin/sh
+          command: |
+            sudo apt-get -t stable install postgresql-client --fix-missing
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:create db:migrate --trace
+      - run:
+          name: Wait for Redis
+          command: |
+            dockerize -wait tcp://localhost:6379 -timeout 2m
+            
+  run_specs:
+    steps:
+      - run: 
+          name: Run feature specs
+          environment:
+            - RAILS_ENV: test
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --profile \
+                              --format RspecJunitFormatter \
+                              --out /tmp/test-results/rspec.xml \
+                              --order random \
+                              --format documentation \
+                              --fail-fast \
+                              -- \
+                              $TEST_FILES
+      - store_test_results:
+          path: /tmp/test-results
+      - run:
+        name: Stash Coverage Results
+        command: |
+          mkdir coverage_results
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage_results
+  
+  merge_coverage:
+    steps:
+      - run:
+          name: Merge and check coverage
+          command: |
+            RUN_COVERAGE=true bundle exec rake simplecov:report_coverage
+      - store_artifacts:
+          path: ~/univ_app/coverage
+          destination: coverage
+  
+jobs:
+  test:
+    executor: default
+    environment:
+      - RAILS_ENV: test
+    steps:
+      - checkout
+      - setup_gems
+      - setup_databases
+      - run_specs
+      - merge_coverage
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - test
+      - coverage:
+          requires:
+            - test
