@@ -3,7 +3,8 @@
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
-require 'selenium-webdriver'
+require 'webdrivers/chromedriver'
+require 'webdrivers/geckodriver'
 
 # Capybara drivers - https://github.com/teamcapybara/capybara#drivers.
 
@@ -15,8 +16,7 @@ Capybara.register_driver(:chrome) do |app|
     # Logging Prefs: "browser", "driver", "client", "server".
     # Loggers Values: "OFF", "SEVERE", "WARNING", "INFO", "CONFIG", "FINE", "FINER", "FINEST", "ALL".
     loggingPrefs: {
-      browser: 'ALL',
-      driver: 'ALL'
+      browser: 'ALL'
     }
   )
 
@@ -51,7 +51,7 @@ Capybara.configure do |config|
   # The name of a driver to use for JavaScript enabled tests.
   config.javascript_driver = :chrome
   # The maximum number of seconds to wait for asynchronous processes to finish (default 2 seconds).
-  config.default_max_wait_time = 5
+  config.default_max_wait_time = 3
   # Whether fields, links, and buttons will match against aria-label attribute.
   config.enable_aria_label = true
   # Whether to ignore hidden elements on the page.
@@ -88,21 +88,17 @@ RSpec.configure do |config|
   # Clear browser data before each test
   config.append_before(:each, type: :feature) do
     Capybara.reset_session!
-    Capybara.execute_script 'try { localStorage.clear() } catch(err) { }'
-    Capybara.execute_script 'try { sessionStorage.clear() } catch(err) { }'
   end
 
   # Save browser, client, driver, and server logs
   config.append_after(:suite) do
     # Gather logs
     browser_logs = Capybara.page.driver.browser.manage.logs.get(:browser)
-    driver_logs = Capybara.page.driver.browser.manage.logs.get(:driver)
 
     # Create tmp/logs folder if it does not exist
     Dir.mkdir('tmp/logs') unless Dir.exist?('tmp/logs')
 
     # Save logs to file
     open('tmp/logs/browser.log', 'w') { |f| f << browser_logs }
-    open('tmp/logs/driver.log', 'w') { |f| f << driver_logs }
   end
 end
