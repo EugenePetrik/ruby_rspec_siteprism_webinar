@@ -67,8 +67,6 @@ commands:
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
             bundle exec rspec --profile \
-                              --format RspecJunitFormatter \
-                              --out /tmp/test-results/rspec.xml \
                               --order random \
                               --format documentation \
                               --fail-fast \
@@ -93,8 +91,8 @@ commands:
           command: |
             RUN_COVERAGE=true bundle exec rake simplecov:report_coverage
       - store_artifacts:
-          path: ~/univ_app/coverage
-          destination: coverage
+          path: ~/univ_app/coverage_results
+          destination: coverage_results
   
 jobs:
   test:
