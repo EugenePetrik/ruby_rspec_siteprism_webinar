@@ -15,7 +15,8 @@ executors:
           POSTGRES_DB: test_db
 
 caches: 
-  - &bundle_cache v1-repo-{{ checksum "Gemfile.lock" }}
+  - &full_gem_cache gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+  - &gem_cache gem-cache
 
 commands:
   setup_gems:
@@ -75,10 +76,10 @@ commands:
       - store_test_results:
           path: /tmp/test-results
       - run:
-        name: Stash Coverage Results
-        command: |
-          mkdir coverage_results
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+          name: Stash Coverage Results
+          command: |
+            mkdir coverage_results
+            cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
       - persist_to_workspace:
           root: .
           paths:
@@ -91,8 +92,8 @@ commands:
           command: |
             RUN_COVERAGE=true bundle exec rake simplecov:report_coverage
       - store_artifacts:
-          path: ~/univ_app/coverage_results
-          destination: coverage_results
+          path: ~/univ_app/coverage
+          destination: coverage
   
 jobs:
   test:
