@@ -16,7 +16,7 @@ Capybara.register_driver(:chrome) do |app|
     # Logging Prefs: "browser", "driver", "client", "server".
     # Loggers Values: "OFF", "SEVERE", "WARNING", "INFO", "CONFIG", "FINE", "FINER", "FINEST", "ALL".
     loggingPrefs: {
-      browser: 'ALL'
+      browser: 'INFO'
     }
   )
 
@@ -96,9 +96,10 @@ RSpec.configure do |config|
     browser_logs = Capybara.page.driver.browser.manage.logs.get(:browser)
 
     # Create tmp/logs folder if it does not exist
-    Dir.mkdir('tmp/logs') unless Dir.exist?('tmp/logs')
+    Dir.mkdir('tmp/log') unless Dir.exist?('tmp/log')
 
     # Save logs to file
-    open('tmp/logs/browser.log', 'w') { |f| f << browser_logs }
+    logs = browser_logs.map(&:to_s).join("\n\n")
+    open('tmp/log/chrome.log', 'w') { |f| f <<  logs }
   end
 end
