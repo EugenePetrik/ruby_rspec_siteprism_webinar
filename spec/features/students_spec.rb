@@ -14,9 +14,16 @@ RSpec.describe 'Students page', type: :feature do
   let(:course3) { create(:course) }
   let(:course4) { create(:course) }
 
+  let(:params_login_data) do
+    {
+      email: student1.email,
+      password: student1.password
+    }
+  end
+
   before do
     login_page.load
-    login_page.login_with(student1.email, student1.password)
+    login_page.login_with(params_login_data)
     students_page.load
   end
 

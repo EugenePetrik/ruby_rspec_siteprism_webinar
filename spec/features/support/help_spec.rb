@@ -5,9 +5,16 @@ RSpec.describe 'Help page' do
   let(:help_page) { HelpPage.new }
   let(:student) { create(:student) }
 
+  let(:params_login_data) do
+    {
+      email: student.email,
+      password: student.password
+    }
+  end
+
   before do
     login_page.load
-    login_page.login_with(student.email, student.password)
+    login_page.login_with(params_login_data)
     help_page.load
   end
 

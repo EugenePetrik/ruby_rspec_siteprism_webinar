@@ -8,9 +8,9 @@ class LoginPage < BasePage
   element :password, '#logins_password'
   element :log_in_button, 'button[name="button"]'
 
-  def login_with(email, password)
-    self.email.set(email)
-    self.password.set(password)
+  def login_with(options = {})
+    email.set(options[:email])
+    password.set(options[:password])
     log_in_button.click
   end
 end

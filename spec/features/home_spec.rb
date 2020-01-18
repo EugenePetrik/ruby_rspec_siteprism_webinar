@@ -7,9 +7,16 @@ RSpec.describe 'Home page' do
   let!(:course) { create_list(:course, 3) }
   let(:message) { "You have successfully enrolled in #{course[0].name}" }
 
+  let(:params_login_data) do
+    {
+      email: student.email,
+      password: student.password
+    }
+  end
+
   before do
     login_page.load
-    login_page.login_with(student.email, student.password)
+    login_page.login_with(params_login_data)
     home_page.load
   end
 

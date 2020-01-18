@@ -5,9 +5,16 @@ RSpec.describe 'Contact Us page', type: :feature do
   let(:contact_us_page) { ContactUsPage.new }
   let(:student) { create(:student) }
 
+  let(:params_login_data) do
+    {
+      email: student.email,
+      password: student.password
+    }
+  end
+
   before do
     login_page.load
-    login_page.login_with(student.email, student.password)
+    login_page.login_with(params_login_data)
     contact_us_page.load
   end
 

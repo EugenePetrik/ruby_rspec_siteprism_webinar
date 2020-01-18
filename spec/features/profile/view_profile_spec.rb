@@ -5,9 +5,16 @@ RSpec.describe 'View Profile page' do
   let(:view_profile_page) { ViewProfilePage.new }
   let(:student) { create(:student, :with_courses, courses_count: 3) }
 
+  let(:params_login_data) do
+    {
+      email: student.email,
+      password: student.password
+    }
+  end
+
   before do
     login_page.load
-    login_page.login_with(student.email, student.password)
+    login_page.login_with(params_login_data)
     view_profile_page.load(student_id: student.id)
   end
 
