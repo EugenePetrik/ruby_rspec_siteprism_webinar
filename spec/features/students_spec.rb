@@ -49,7 +49,7 @@ RSpec.describe 'Students page', type: :feature do
   end
 
   context 'when open profile page for student without courses' do
-    it 'courses are not displayed', :smoke do
+    it 'courses are not displayed', skip: 'Flaky test' do
       students_page.open_student_profile_for(student3.id)
 
       expect(view_profile_page).to be_displayed(student_id: student3.id)

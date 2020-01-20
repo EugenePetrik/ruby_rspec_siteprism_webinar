@@ -35,3 +35,6 @@
 
 # Allows RSpec to persist some state between runs
 /spec/examples.txt
+
+# Ignore RSpec report file
+/reports/

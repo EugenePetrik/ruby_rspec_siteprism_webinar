@@ -25,8 +25,8 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache
+            - *full_gem_cache
+            - *gem_cache
       - run:
           name: Install Bundler
           command: gem install bundler
@@ -37,7 +37,7 @@ commands:
           name: Bundle Install
           command: bundle check || bundle install
       - save_cache:
-          key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: *full_gem_cache
           paths:
             - ~/univ_app/vendor/bundle
 
@@ -68,6 +68,8 @@ commands:
                               --order random \
                               --format documentation \
                               --fail-fast \
+                              --format html \
+                              --out reports/rspec_results.html \
                               -- \
                               $TEST_FILES
       - store_test_results:
@@ -75,9 +77,18 @@ commands:
       - store_artifacts:
           path: ~/univ_app/coverage
           destination: coverage
+      - store_artifacts:
+          path: ~/univ_app/reports
+          destination: rspec_reports
+      - store_artifacts:
+          path: ~/univ_app/tmp/capybara
+          destination: capybara_screenshot
+      - store_artifacts:
+          path: ~/univ_app/tmp/logs
+          destination: logs
 
 jobs:
-  feature_tests:
+  e2e:
     executor: default
     environment:
       - RAILS_ENV: test
@@ -91,4 +102,4 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - feature_tests
+      - e2e

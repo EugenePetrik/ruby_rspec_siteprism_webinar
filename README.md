@@ -1,7 +1,7 @@
 ## This project has been prepared for the webinar.
 ## We use the following tools, such as **Ruby**, **Capybara**, **SitePrism**, and **RSpec**.
 
-[![CircleCI](https://circleci.com/gh/EugenePetrik/ruby_page_object_webinar.svg?style=svg)](https://circleci.com/gh/EugenePetrik/workflows/ruby_page_object_webinar/tree/develop)
+[![CircleCI](https://circleci.com/gh/EugenePetrik/ruby_page_object_webinar/tree/master.svg?style=svg)](https://circleci.com/gh/EugenePetrik/ruby_page_object_webinar/tree/master)
 
 #### Install Postgres for Ubuntu
 
@@ -180,6 +180,12 @@ rspec spec/features --tag smoke
 CHROME_HEADLESS=0 rspec spec/features --tag smoke
 ```
 
+#### Run specs with RSpec Test Results in HTML
+
+```shell
+rspec spec/features --format progress --format html --out reports/rspec_results.html
+```
+
 #### Useful links
 
 [Site Prism gem](https://github.com/site-prism/site_prism)
@@ -193,3 +199,7 @@ CHROME_HEADLESS=0 rspec spec/features --tag smoke
 [Faker Generators](https://github.com/faker-ruby/faker#generators)
 
 [Fuubar RSpec Formatter](https://github.com/thekompanee/fuubar)
+
+[Filter specs with a tag option](https://relishapp.com/rspec/rspec-core/v/3-9/docs/command-line/tag-option#filter-examples-with-a-simple-tag)
+
+[RSpec Test Results in HTML](https://coderwall.com/p/gfmeuw/rspec-test-results-in-html)
