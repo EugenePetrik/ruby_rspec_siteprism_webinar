@@ -3,16 +3,17 @@ version: 2.1
 executors:
   default:
     working_directory: ~/univ_app
-    description: The official CircleCI Ruby Docker image
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
           RAILS_ENV: test
       - image: circleci/postgres:11.3-alpine
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test_db
+          POSTGRES_DB: univ_app_test
 
 caches: 
   - &full_gem_cache gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
@@ -24,8 +25,8 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - *full_gem_cache
-            - *gem_cache
+            - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache
       - run:
           name: Install Bundler
           command: gem install bundler
@@ -36,7 +37,7 @@ commands:
           name: Bundle Install
           command: bundle check || bundle install
       - save_cache:
-          key: *full_gem_cache
+          key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - ~/univ_app/vendor/bundle
 
@@ -53,10 +54,6 @@ commands:
       - run:
           name: Database setup
           command: bin/rails db:create db:migrate --trace
-      - run:
-          name: Wait for Redis
-          command: |
-            dockerize -wait tcp://localhost:6379 -timeout 2m
             
   run_specs:
     steps:
@@ -75,28 +72,12 @@ commands:
                               $TEST_FILES
       - store_test_results:
           path: /tmp/test-results
-      - run:
-          name: Stash Coverage Results
-          command: |
-            mkdir coverage_results
-            cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
-      - persist_to_workspace:
-          root: .
-          paths:
-            - coverage_results
-  
-  merge_coverage:
-    steps:
-      - run:
-          name: Merge and check coverage
-          command: |
-            RUN_COVERAGE=true bundle exec rake simplecov:report_coverage
       - store_artifacts:
           path: ~/univ_app/coverage
           destination: coverage
-  
+
 jobs:
-  test:
+  feature_tests:
     executor: default
     environment:
       - RAILS_ENV: test
@@ -105,13 +86,9 @@ jobs:
       - setup_gems
       - setup_databases
       - run_specs
-      - merge_coverage
 
 workflows:
   version: 2.1
   build:
     jobs:
-      - test
-      - coverage:
-          requires:
-            - test
+      - feature_tests

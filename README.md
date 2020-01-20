@@ -1,6 +1,8 @@
 ## This project has been prepared for the webinar.
 ## We use the following tools, such as **Ruby**, **Capybara**, **SitePrism**, and **RSpec**.
 
+[![CircleCI](https://circleci.com/gh/EugenePetrik/ruby_page_object_webinar.svg?style=svg)](https://circleci.com/gh/EugenePetrik/workflows/ruby_page_object_webinar/tree/develop)
+
 #### Install Postgres for Ubuntu
 
 [Setup Postgres for Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04)

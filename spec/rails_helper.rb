@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-require 'database_cleaner'
-require 'site_prism'
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
