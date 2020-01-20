@@ -117,15 +117,19 @@ rails db:create
 rails db:migrate
 ```
 
-```shell
-Test User -> test@test.com / 123456
-```
-
 #### Seeds database with fake data
 
 ```shell
 rails db:test:populate
 ```
+
+#### Test user
+
+```shell
+Login - test@test.com
+Password - 123456
+```
+
 #### Run Rubocop
 
 ```shell

@@ -39,7 +39,7 @@ RSpec.describe 'Login page' do
     let(:view_profile_page) { ViewProfilePage.new }
 
     it 'student logs in' do
-      params_login_data.merge!(email: student.email.upcase)
+      params_login_data[:email] = student.email.upcase
 
       login_page.login_with(params_login_data)
 
@@ -50,7 +50,7 @@ RSpec.describe 'Login page' do
 
   context 'with nonexistent email' do
     it 'raises an error' do
-      params_login_data.merge!(email: "student_#{student.email.upcase}")
+      params_login_data[:email] = "student_#{student.email.upcase}"
 
       login_page.login_with(params_login_data)
 
@@ -61,7 +61,7 @@ RSpec.describe 'Login page' do
 
   context 'with empty email' do
     it 'raises an error' do
-      params_login_data.merge!(email: ' ')
+      params_login_data[:email] = ' '
 
       login_page.login_with(params_login_data)
 
@@ -72,7 +72,7 @@ RSpec.describe 'Login page' do
 
   context 'with incorrect password' do
     it 'raises an error' do
-      params_login_data.merge!(password: "pass_#{student.password}")
+      params_login_data[:password] = "pass_#{student.password}"
 
       login_page.login_with(params_login_data)
 
@@ -83,7 +83,7 @@ RSpec.describe 'Login page' do
 
   context 'with empty password' do
     it 'raises an error' do
-      params_login_data.merge!(password: ' ')
+      params_login_data[:password] = ' '
 
       login_page.login_with(params_login_data)
 

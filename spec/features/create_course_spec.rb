@@ -57,7 +57,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with empty course name' do
     it 'raises an error' do
-      params_course_data.merge!(name: '')
+      params_course_data[:name] = ''
 
       create_course_page.create_course_with(params_course_data)
 
@@ -68,7 +68,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with too short course name' do
     it 'raises an error' do
-      params_course_data.merge!(name: Faker::Lorem.characters(number: rand(1..4)).upcase)
+      params_course_data[:name] = Faker::Lorem.characters(number: rand(1..4)).upcase
 
       create_course_page.create_course_with(params_course_data)
 
@@ -78,7 +78,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with too long course name' do
     it 'raises an error' do
-      params_course_data.merge!(name: Faker::Lorem.characters(number: rand(51..100)).upcase)
+      params_course_data[:name] = Faker::Lorem.characters(number: rand(51..100)).upcase
 
       create_course_page.create_course_with(params_course_data)
 
@@ -88,7 +88,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with empty course short name' do
     it 'raises an error' do
-      params_course_data.merge!(short_name: '')
+      params_course_data[:short_name] = ''
 
       create_course_page.create_course_with(params_course_data)
 
@@ -99,7 +99,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with too short course short name' do
     it 'raises an error' do
-      params_course_data.merge!(short_name: Faker::Lorem.characters(number: rand(1..2)).upcase)
+      params_course_data[:short_name] = Faker::Lorem.characters(number: rand(1..2)).upcase
 
       create_course_page.create_course_with(params_course_data)
 
@@ -109,7 +109,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with too long course short name' do
     it 'raises an error' do
-      params_course_data.merge!(short_name: Faker::Lorem.characters(number: rand(16..30)).upcase)
+      params_course_data[:short_name] = Faker::Lorem.characters(number: rand(16..30)).upcase
 
       create_course_page.create_course_with(params_course_data)
 
@@ -119,7 +119,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with empty course description' do
     it 'raises an error' do
-      params_course_data.merge!(description: '')
+      params_course_data[:description] = ''
 
       create_course_page.create_course_with(params_course_data)
 
@@ -130,7 +130,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with too short course description' do
     it 'raises an error' do
-      params_course_data.merge!(description: Faker::Lorem.paragraph_by_chars(number: rand(1..9)))
+      params_course_data[:description] = Faker::Lorem.paragraph_by_chars(number: rand(1..9))
 
       create_course_page.create_course_with(params_course_data)
 
@@ -140,7 +140,7 @@ RSpec.describe 'Create Course page' do
 
   context 'with too long course description' do
     it 'raises an error' do
-      params_course_data.merge!(description: Faker::Lorem.paragraph_by_chars(number: rand(301..350)))
+      params_course_data[:description] = Faker::Lorem.paragraph_by_chars(number: rand(301..350))
 
       create_course_page.create_course_with(params_course_data)
 

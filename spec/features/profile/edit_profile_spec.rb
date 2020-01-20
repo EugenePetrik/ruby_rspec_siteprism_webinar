@@ -62,7 +62,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
   context 'without name' do
     it 'raises an error' do
-      params_student_data.merge!(name: '  ')
+      params_student_data[:name] = '  '
 
       edit_profile_page.edit_profile_with(params_student_data)
 
@@ -73,7 +73,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
   context 'with too long name' do
     it 'raises an error' do
-      params_student_data.merge!(name: Faker::Lorem.characters(number: rand(51..100)))
+      params_student_data[:name] = Faker::Lorem.characters(number: rand(51..100))
 
       edit_profile_page.edit_profile_with(params_student_data)
 
@@ -83,7 +83,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
   context 'with too short name' do
     it 'raises an error' do
-      params_student_data.merge!(name: Faker::Lorem.characters(number: rand(1..4)))
+      params_student_data[:name] = Faker::Lorem.characters(number: rand(1..4))
 
       edit_profile_page.edit_profile_with(params_student_data)
 
@@ -93,7 +93,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
   context 'without email' do
     it 'raises an error' do
-      params_student_data.merge!(email: '  ')
+      params_student_data[:email] = '  '
 
       edit_profile_page.edit_profile_with(params_student_data)
 
@@ -104,7 +104,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
   context 'with invalid email' do
     it 'raises an error' do
-      params_student_data.merge!(email: "#{Faker::Internet.username}@#{Faker::Internet.domain_word}")
+      params_student_data[:email] = "#{Faker::Internet.username}@#{Faker::Internet.domain_word}"
 
       edit_profile_page.edit_profile_with(params_student_data)
 
@@ -114,7 +114,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
   context 'with different password and password confirmation' do
     it 'raises an error' do
-      params_student_data.merge!(pass_confirm: Faker::Internet.password)
+      params_student_data[:pass_confirm] = Faker::Internet.password
 
       edit_profile_page.edit_profile_with(params_student_data)
 
