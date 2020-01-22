@@ -16,4 +16,8 @@ class ViewProfilePage < BasePage
   def click_to_edit_profile_button
     edit_profile_button.click
   end
+
+  def courses_links
+    course_links.map(&:text)
+  end
 end

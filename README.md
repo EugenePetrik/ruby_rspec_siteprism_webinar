@@ -11,62 +11,6 @@
 
 [Setup Postgres for Mac](https://www.codementor.io/@engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb)
 
-#### Install Chromedriver on Ubuntu
-
-```shell
-wget -N http://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip -P ~/
-```
-
-```shell
-unzip ~/chromedriver_linux64.zip -d ~/
-```
-
-```shell
-rm ~/chromedriver_linux64.zip
-```
-
-```shell
-sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-```
-
-```shell
-sudo chown root:root /usr/local/bin/chromedriver
-```
-
-```shell
-sudo chmod 0755 /usr/local/bin/chromedriver
-```
-
-#### Install Chromedriver on Mac via Homebrew
-
-```shell
-brew cask install chromedriver
-```
-
-#### Install Geckodriver on Ubuntu
-
-```shell
-wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
-```
-
-```shell
-sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.26.0-linux64.tar.gz -O > /usr/bin/geckodriver'
-```
-
-```shell
-sudo chmod +x /usr/bin/geckodriver
-```
-
-```shell
-rm geckodriver-v0.26.0-linux64.tar.gz
-```
-
-#### Install Geckodriver on Mac via Homebrew
-
-```shell
-brew install geckodriver
-```
-
 #### Install rvm Ubuntu
 
 [Ubuntu rvm](https://github.com/rvm/ubuntu_rvm)
@@ -207,3 +151,5 @@ rspec spec/features --format progress --format html --out reports/rspec_results.
 [Filter specs with a tag option](https://relishapp.com/rspec/rspec-core/v/3-9/docs/command-line/tag-option#filter-examples-with-a-simple-tag)
 
 [RSpec Test Results in HTML](https://coderwall.com/p/gfmeuw/rspec-test-results-in-html)
+
+[Factory Bot Cheatsheet](https://devhints.io/factory_bot)

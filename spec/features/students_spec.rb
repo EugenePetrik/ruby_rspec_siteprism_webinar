@@ -38,12 +38,12 @@ RSpec.describe 'Students page', type: :feature do
     end
 
     it 'student ids match' do
-      expect(students_page.student_cards_ids)
+      expect(students_page.students_cards_ids)
         .to eq([student1.id, student2.id, student3.id])
     end
 
     it 'student names match' do
-      expect(students_page.student_names.map(&:text))
+      expect(students_page.students_names)
         .to match_array([student1.name, student2.name, student3.name])
     end
   end

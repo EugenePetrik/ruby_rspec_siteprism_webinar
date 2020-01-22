@@ -61,6 +61,8 @@ group :development do
   # Read more: https://github.com/rails/spring
   gem 'spring', '~> 1.7', '>= 1.7.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # https://github.com/rubocop-hq/rubocop-performance
+  gem 'rubocop-performance', '~> 1.5', '>= 1.5.1'
 end
 
 group :test do
@@ -76,8 +78,6 @@ group :test do
   gem 'site_prism', '~> 3.4', '>= 3.4.1'
   # https://github.com/rspec/rspec-rails
   gem 'rspec-rails', '~> 3.9'
-  # https://github.com/rubocop-hq/rubocop-performance
-  gem 'rubocop-performance', '~> 1.5', '>= 1.5.1'
   # https://github.com/rubocop-hq/rubocop-rspec
   gem 'rubocop-rspec', '~> 1.37'
   # https://rubygems.org/gems/webdrivers/versions/4.2.0

@@ -11,8 +11,12 @@ class StudentsPage < BasePage
 
   expected_elements :student_title
 
-  def student_cards_ids
+  def students_cards_ids
     student_cards.map { |student| student[STUDENT_CARD_SELECTOR].to_i }
+  end
+
+  def students_names
+    student_names.map(&:text)
   end
 
   def open_student_profile_for(student_id)

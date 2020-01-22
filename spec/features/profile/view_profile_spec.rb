@@ -38,7 +38,7 @@ RSpec.describe 'View Profile page' do
 
     it 'course names match' do
       course = Course.all
-      expect(view_profile_page.course_links.map(&:text))
+      expect(view_profile_page.courses_links)
         .to match_array([course[0].name, course[1].name, course[2].name])
     end
   end

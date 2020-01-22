@@ -11,8 +11,12 @@ class HomePage < BasePage
 
   expected_elements :course_title
 
-  def course_cards_ids
+  def courses_cards_ids
     course_cards.map { |course| course[COURSE_CARD_SELECTOR].to_i }
+  end
+
+  def courses_titles
+    course_titles.map(&:text)
   end
 
   def course_enroll_with(course_id)

@@ -28,7 +28,7 @@ RSpec.describe 'Login page' do
     it 'student logs in' do
       login_page.login_with(params_login_data)
 
-      expect(view_profile_page).to be_displayed(student_id: /\d+/)
+      expect(view_profile_page).to be_displayed(student_id: student.id)
       expect(view_profile_page).to be_all_there
       expect(view_profile_page).to be_nav_bar_login_user_visible
       expect(view_profile_page).to be_footer_visible
@@ -43,7 +43,7 @@ RSpec.describe 'Login page' do
 
       login_page.login_with(params_login_data)
 
-      expect(view_profile_page).to be_displayed(student_id: /\d+/)
+      expect(view_profile_page).to be_displayed(student_id: student.id)
       expect(view_profile_page).to be_all_there
     end
   end

@@ -36,12 +36,12 @@ RSpec.describe 'Home page' do
     end
 
     it 'course cards ids match' do
-      expect(home_page.course_cards_ids)
+      expect(home_page.courses_cards_ids)
         .to eq([course[0].id, course[1].id, course[2].id])
     end
 
     it 'course titles match' do
-      expect(home_page.course_titles.map(&:text))
+      expect(home_page.courses_titles)
         .to match_array([course[0].name, course[1].name, course[2].name])
     end
   end
