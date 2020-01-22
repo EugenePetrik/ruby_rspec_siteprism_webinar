@@ -30,8 +30,8 @@ require File.expand_path('support/pages/base_page', __dir__)
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 
-# Load modules under the spec/support directory
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+# Load all files with methods from the support directory
+Dir[File.dirname(__FILE__) + '/support/**/*.rb'].sort.each { |file| require file }
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
