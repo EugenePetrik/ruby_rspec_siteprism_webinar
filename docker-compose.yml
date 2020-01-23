@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:,gresql/data
+    networks:
+      rails-network:
+        aliases:
+          - db.com
+  web:
+    build: .
+    volumes:
+      - .:/ruby_page_object_webinar
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      rails-network:
+        aliases:
+          - web.com
+  chrome:
+    image: selenium/standalone-chrome-debug:3.9.1-actinium
+    ports:
+      - "4444:4444"
+      - "5900:5900"
+    depends_on:
+      - web
+    networks:
+      rails-network:
+        aliases:
+          - chrome.com
+networks:
+  rails-network:
