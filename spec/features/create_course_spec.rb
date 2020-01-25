@@ -43,7 +43,8 @@ RSpec.describe 'Create Course page' do
       course_name = params_course_data[:name]
       course_description = params_course_data[:description]
 
-      expect(view_course_page.flash_message.text).to eq(I18n.t('success_create', course_name: course_name))
+      # expect(view_course_page.flash_message.text).to eq(I18n.t('success_create', course_name: course_name))
+      expect(view_course_page.flash_message.text).to eq("You have successfully create #{course_name}!")
       expect(view_course_page.course_title.text).to eq(course_name)
       expect(view_course_page.course_description.text).to eq(course_description)
     end
@@ -61,8 +62,10 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.name_is_blank'))
-      expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))
+      expect(create_course_page).to have_content("Name can't be blank")
+      # expect(create_course_page).to have_content(I18n.t('errors.course.name_is_blank'))
+      expect(create_course_page).to have_content('Name is too short (minimum is 5 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))
     end
   end
 
@@ -72,7 +75,8 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))
+      expect(create_course_page).to have_content('Name is too short (minimum is 5 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))
     end
   end
 
@@ -82,7 +86,8 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.name_too_long'))
+      expect(create_course_page).to have_content('Name is too long (maximum is 50 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.name_too_long'))
     end
   end
 
@@ -92,8 +97,10 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.short_name_is_blank'))
-      expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_short'))
+      expect(create_course_page).to have_content("Short name can't be blank")
+      # expect(create_course_page).to have_content(I18n.t('errors.course.short_name_is_blank'))
+      expect(create_course_page).to have_content('Short name is too short (minimum is 3 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_short'))
     end
   end
 
@@ -103,7 +110,8 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_short'))
+      expect(create_course_page).to have_content('Short name is too short (minimum is 3 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_short'))
     end
   end
 
@@ -113,7 +121,8 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_long'))
+      expect(create_course_page).to have_content('Short name is too long (maximum is 15 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_long'))
     end
   end
 
@@ -123,8 +132,10 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.desc_is_blank'))
-      expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_short'))
+      expect(create_course_page).to have_content("Description can't be blank")
+      # expect(create_course_page).to have_content(I18n.t('errors.course.desc_is_blank'))
+      expect(create_course_page).to have_content('Description is too short (minimum is 10 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_short'))
     end
   end
 
@@ -134,7 +145,8 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_short'))
+      expect(create_course_page).to have_content('Description is too short (minimum is 10 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_short'))
     end
   end
 
@@ -144,7 +156,8 @@ RSpec.describe 'Create Course page' do
 
       create_course_page.create_course_with(params_course_data)
 
-      expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_long'))
+      expect(create_course_page).to have_content('Description is too long (maximum is 300 characters)')
+      # expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_long'))
     end
   end
 end

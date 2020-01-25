@@ -3,7 +3,6 @@
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'webdrivers/chromedriver'
-require 'webdrivers/geckodriver'
 
 # Capybara drivers - https://github.com/teamcapybara/capybara#drivers.
 
@@ -67,7 +66,7 @@ RSpec.configure do |config|
     Capybara.reset_session!
   end
 
-  # Save browser, client, driver, and server logs
+  # Save browser logs
   config.append_after(:suite) do
     # Gather logs
     browser_logs = Capybara.page.driver.browser.manage.logs.get(:browser)
@@ -75,7 +74,7 @@ RSpec.configure do |config|
     # Create tmp/logs folder if it does not exist
     Dir.mkdir('tmp/logs') unless Dir.exist?('tmp/logs')
 
-    # Save logs to file
+    # Save browser logs to file
     logs = browser_logs.map(&:to_s).join("\n\n")
     open('tmp/logs/chrome.log', 'w') { |f| f << logs }
   end

@@ -4,7 +4,6 @@ RSpec.describe 'Login page' do
   let(:login_page) { LoginPage.new }
   let(:home_page) { HomePage.new }
   let(:student) { create(:student) }
-  let(:message) { 'Something was wrong with your login information' }
 
   let(:params_login_data) do
     {
@@ -54,8 +53,8 @@ RSpec.describe 'Login page' do
 
       login_page.login_with(params_login_data)
 
-      # expect(login_page.flash_message.text).to eq(message)
-      expect(login_page.flash_message.text).to eq(I18n.t('logins.create.something_was_wrong'))
+      expect(login_page.flash_message.text).to eq('Something was wrong with your login information')
+      # expect(login_page.flash_message.text).to eq(I18n.t('logins.create.something_was_wrong'))
     end
   end
 
@@ -65,8 +64,8 @@ RSpec.describe 'Login page' do
 
       login_page.login_with(params_login_data)
 
-      # expect(login_page).to have_content(message)
-      expect(login_page).to have_content(I18n.t('logins.create.something_was_wrong'))
+      expect(login_page).to have_content('Something was wrong with your login information')
+      # expect(login_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end
   end
 
@@ -76,8 +75,8 @@ RSpec.describe 'Login page' do
 
       login_page.login_with(params_login_data)
 
-      # expect(login_page).to have_content(message)
-      expect(login_page).to have_content(I18n.t('logins.create.something_was_wrong'))
+      expect(login_page).to have_content('Something was wrong with your login information')
+      # expect(login_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end
   end
 
@@ -87,8 +86,8 @@ RSpec.describe 'Login page' do
 
       login_page.login_with(params_login_data)
 
-      # expect(login_page).to have_content(message)
-      expect(login_page).to have_content(I18n.t('logins.create.something_was_wrong'))
+      expect(login_page).to have_content('Something was wrong with your login information')
+      # expect(login_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end
   end
 end

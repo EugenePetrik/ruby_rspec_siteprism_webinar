@@ -5,7 +5,6 @@ RSpec.describe 'Home page' do
   let(:home_page) { HomePage.new }
   let(:student) { create(:student) }
   let!(:course) { create_list(:course, 3) }
-  let(:message) { "You have successfully enrolled in #{course[0].name}" }
 
   let(:params_login_data) do
     {
@@ -27,8 +26,8 @@ RSpec.describe 'Home page' do
     it { expect(home_page).to be_footer_visible }
 
     it 'shows title' do
-      # expect(home_page.title).to eq('Tech University')
-      expect(home_page.title).to eq(I18n.t('layouts.navigation.tech_university'))
+      expect(home_page.title).to eq('Tech University')
+      # expect(home_page.title).to eq(I18n.t('layouts.navigation.tech_university'))
     end
 
     it 'course cards are displayed' do
@@ -55,8 +54,8 @@ RSpec.describe 'Home page' do
       expect(view_profile_page).to be_displayed
       expect(view_profile_page).to be_all_there
 
-      # expect(view_profile_page.flash_message.text).to have_content(message)
-      expect(view_profile_page.flash_message.text).to eq(I18n.t('success_enroll', course_name: course[0].name))
+      expect(view_profile_page.flash_message.text).to have_content("You have successfully enrolled in #{course[0].name}")
+      # expect(view_profile_page.flash_message.text).to eq(I18n.t('success_enroll', course_name: course[0].name))
 
       expect(view_profile_page).to be_nav_bar_login_user_visible
       expect(view_profile_page).to be_footer_visible

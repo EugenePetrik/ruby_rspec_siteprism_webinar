@@ -72,14 +72,14 @@ group :test do
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.24'
   # https://github.com/DatabaseCleaner/database_cleaner
   gem 'database_cleaner', '~> 1.7'
-  # https://github.com/colszowka/simplecov
-  gem 'simplecov', '~> 0.17.1'
-  # https://github.com/site-prism/site_prism
-  gem 'site_prism', '~> 3.4', '>= 3.4.1'
   # https://github.com/rspec/rspec-rails
   gem 'rspec-rails', '~> 3.9'
   # https://github.com/rubocop-hq/rubocop-rspec
   gem 'rubocop-rspec', '~> 1.37'
+  # https://github.com/colszowka/simplecov
+  gem 'simplecov', '~> 0.17.1'
+  # https://github.com/site-prism/site_prism
+  gem 'site_prism', '~> 3.4', '>= 3.4.1'
   # https://rubygems.org/gems/webdrivers/versions/4.2.0
   gem 'webdrivers', '~> 4.2'
 end

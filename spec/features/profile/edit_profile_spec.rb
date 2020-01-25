@@ -44,7 +44,8 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       expect(view_profile_page).to be_displayed(student_id: student.id)
       expect(view_profile_page).to be_all_there
-      expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
+      expect(view_profile_page).to have_content('You have successfully updated your profile')
+      # expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
       expect(view_profile_page.user_name.text).to eq(params_student_data[:name])
       expect(view_profile_page.user_email.text).to eq(params_student_data[:email])
     end
@@ -54,7 +55,8 @@ RSpec.describe 'Edit Profile page', type: :feature do
     it 'profile saved', :smoke do
       edit_profile_page.edit_profile_with(params_student_data)
 
-      expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
+      expect(view_profile_page).to have_content('You have successfully updated your profile')
+      # expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
       expect(view_profile_page.user_name.text).to eq(params_student_data[:name])
       expect(view_profile_page.user_email.text).to eq(params_student_data[:email])
     end
@@ -66,8 +68,10 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       edit_profile_page.edit_profile_with(params_student_data)
 
-      expect(view_profile_page).to have_content(I18n.t('errors.student.name_is_blank'))
-      expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_short'))
+      expect(view_profile_page).to have_content("Name can't be blank")
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.name_is_blank'))
+      expect(view_profile_page).to have_content('Name is too short (minimum is 5 characters)')
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_short'))
     end
   end
 
@@ -77,7 +81,8 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       edit_profile_page.edit_profile_with(params_student_data)
 
-      expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_long'))
+      expect(view_profile_page).to have_content('Name is too long (maximum is 50 characters)')
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_long'))
     end
   end
 
@@ -87,7 +92,8 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       edit_profile_page.edit_profile_with(params_student_data)
 
-      expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_short'))
+      expect(view_profile_page).to have_content('Name is too short (minimum is 5 characters)')
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_short'))
     end
   end
 
@@ -97,8 +103,10 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       edit_profile_page.edit_profile_with(params_student_data)
 
-      expect(view_profile_page).to have_content(I18n.t('errors.student.email_is_blank'))
-      expect(view_profile_page).to have_content(I18n.t('errors.student.invalid_email'))
+      expect(view_profile_page).to have_content("Email can't be blank")
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.email_is_blank'))
+      expect(view_profile_page).to have_content('Email is invalid')
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.invalid_email'))
     end
   end
 
@@ -108,7 +116,8 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       edit_profile_page.edit_profile_with(params_student_data)
 
-      expect(view_profile_page).to have_content(I18n.t('errors.student.invalid_email'))
+      expect(view_profile_page).to have_content('Email is invalid')
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.invalid_email'))
     end
   end
 
@@ -118,7 +127,8 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       edit_profile_page.edit_profile_with(params_student_data)
 
-      expect(view_profile_page).to have_content(I18n.t('errors.student.pass_does_not_match'))
+      expect(view_profile_page).to have_content("Password confirmation doesn't match Password")
+      # expect(view_profile_page).to have_content(I18n.t('errors.student.pass_does_not_match'))
     end
   end
 end

@@ -56,7 +56,8 @@ RSpec.describe 'Students page', type: :feature do
       expect(view_profile_page.user_name.text).to eq(student3.name)
       expect(view_profile_page.user_email.text).to eq(student3.email)
       expect(view_profile_page.course_links.size).to eq(0)
-      expect(view_profile_page).to have_content(I18n.t('students.show.none'))
+      expect(view_profile_page).to have_content('None')
+      # expect(view_profile_page).to have_content(I18n.t('student s.show.none'))
     end
   end
 
