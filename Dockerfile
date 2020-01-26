@@ -1,26 +1,36 @@
-FROM ruby:2.6
+FROM ruby:2.6.5
 
-# libnss3-dev is necessary to install google-chrome & run chromedriver-helper
 RUN apt-get update -qq && apt-get install -y postgresql-client libnss3-dev
 
-# Install the newest version of NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt-get install -y nodejs
+ENV APP_USER app
+ENV APP_USER_HOME /home/$APP_USER
+ENV APP_HOME /home/www/ruby_page_object_webinar
 
-# Install google-chrome for debian
+RUN useradd -m -d $APP_USER_HOME $APP_USER
+
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN dpkg -i google-chrome*.deb || apt update && apt-get install -f -y
 
-RUN mkdir /ruby_page_object_webinar
-WORKDIR /ruby_page_object_webinar
-COPY Gemfile /ruby_page_object_webinar/Gemfile
-COPY Gemfile.lock /ruby_page_object_webinar/Gemfile.lock
-RUN bundle install
-COPY . /ruby_page_object_webinar
+RUN mkdir /var/www && \
+   chown -R $APP_USER:$APP_USER /var/www && \
+   chown -R $APP_USER $APP_USER_HOME
 
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
+WORKDIR $APP_HOME
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+USER $APP_USER
+
+COPY Gemfile Gemfile.lock .ruby-version ./
+
+RUN gem i bundler -v $(tail -1 Gemfile.lock | tr -d ' ')
+
+RUN bundle check || bundle install
+
+COPY . .
+
+USER root
+
+RUN chown -R $APP_USER:$APP_USER "$APP_HOME/."
+
+USER $APP_USER
+
+CMD bundle exec puma -C config/puma.rb
