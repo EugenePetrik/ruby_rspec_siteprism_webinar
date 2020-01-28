@@ -7,7 +7,7 @@ services:
   db:
     image: postgres:11-alpine
     ports:
-      - 5432:5432
+      - 5433:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -15,14 +15,6 @@ services:
       - postgres:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
-
-  chrome:
-    image: selenium/standalone-chrome-debug:3.9.1-actinium
-    ports:
-      - "4444:4444"
-      - "5900:5900"
-    depends_on:
-      - server_app
 
   server_app:
     build: .
@@ -33,10 +25,9 @@ services:
     tty: true
     stdin_open: true
     environment: &server_app_env
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
+      POSTGRES_HOST: db
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
     depends_on:
       - db
     ports:

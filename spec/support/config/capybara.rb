@@ -25,6 +25,9 @@ Capybara.register_driver(:chrome) do |app|
   options.add_argument('window-size=1600,1268')
   # Run headless by default unless CHROME_HEADLESS specified.
   options.add_argument('headless') unless /^(false|no|0)$/.match?(ENV['CHROME_HEADLESS'])
+  # Disable the sandbox and run in headless mode when running in docker
+  options.add_argument('--no-sandbox')
+  options.add_argument("--disable-setuid-sandbox")
 
   # Configuring and adding driver
   # https://github.com/teamcapybara/capybara#configuring-and-adding-drivers

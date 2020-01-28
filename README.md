@@ -134,6 +134,38 @@ CHROME_HEADLESS=0 rspec spec/features --tag smoke
 rspec spec/features --format progress --format html --out reports/rspec_results.html
 ```
 
+### Docker
+
+[Install docker and docker-compose](https://docs.docker.com/compose/install/)
+
+```shell
+sudo apt-get install docker docker-compose
+```
+
+#### Run the project
+
+```shell
+docker-compose up
+```
+
+#### Re-run project with modified configs
+
+```shell
+docker-compose up --force-recreate --build server_app
+```
+
+#### Run specs
+
+```shell
+bin/docker rspec
+```
+
+#### Run a single spec file
+
+```shell
+bin/docker rspec spec/features/authentication/login_spec.rb
+```
+
 #### Useful links
 
 [Site Prism gem](https://github.com/site-prism/site_prism)

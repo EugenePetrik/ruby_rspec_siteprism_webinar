@@ -8,6 +8,8 @@ namespace :db do
       require 'factory_bot'
       require 'faker'
 
+      next if Student.all.any?
+
       puts "=========== 'Create Students' ==========="
 
       FactoryBot.create(:student, name: 'Joe Doe', email: 'test@test.com', password: '123456')
