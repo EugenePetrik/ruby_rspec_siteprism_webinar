@@ -57,9 +57,12 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.2', '>= 3.2.1'
   gem 'web-console', '~> 4.0', '>= 4.0.1'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Spring speeds up development by keeping your application running in the background.
+  # Read more: https://github.com/rails/spring
   gem 'spring', '~> 1.7', '>= 1.7.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # https://github.com/rubocop-hq/rubocop-performance
+  gem 'rubocop-performance', '~> 1.5', '>= 1.5.1'
 end
 
 group :test do
@@ -69,16 +72,14 @@ group :test do
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.24'
   # https://github.com/DatabaseCleaner/database_cleaner
   gem 'database_cleaner', '~> 1.7'
-  # https://github.com/SeleniumHQ/selenium
-  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.6'
+  # https://github.com/rspec/rspec-rails
+  gem 'rspec-rails', '~> 3.9'
+  # https://github.com/rubocop-hq/rubocop-rspec
+  gem 'rubocop-rspec', '~> 1.37'
   # https://github.com/colszowka/simplecov
   gem 'simplecov', '~> 0.17.1'
   # https://github.com/site-prism/site_prism
   gem 'site_prism', '~> 3.4', '>= 3.4.1'
-  # RSpec testing framework
-  gem 'rspec-rails', '~> 3.9'
-  # https://github.com/rubocop-hq/rubocop-performance
-  gem 'rubocop-performance', '~> 1.5', '>= 1.5.1'
-  # https://github.com/rubocop-hq/rubocop-rspec
-  gem 'rubocop-rspec', '~> 1.37'
+  # https://rubygems.org/gems/webdrivers/versions/4.2.0
+  gem 'webdrivers', '~> 4.2'
 end

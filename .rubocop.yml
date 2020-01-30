@@ -7,17 +7,22 @@ AllCops:
     - 'db/**/*'
     - 'vendor/**/*'
     - 'tmp/**/*'
+    - 'app/**/*'
+    - 'bin/**/*'
   TargetRubyVersion: 2.6
-  TargetRailsVersion: 6.0
 
 Style/Documentation:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Metrics/BlockLength:
-  Max: 100
+  Max: 40
+  ExcludedMethods: ['describe', 'context', 'it']
+
+Metrics/AbcSize:
+  Enabled: false
 
 Lint/Debugger:
   Enabled: false
@@ -30,4 +35,7 @@ RSpec/MessageChain:
   Enabled: true
 
 RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/DescribeClass:
   Enabled: false

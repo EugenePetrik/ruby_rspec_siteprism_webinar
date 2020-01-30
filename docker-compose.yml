@@ -1,0 +1,36 @@
+version: "3.7"
+
+volumes:
+  postgres:
+
+services:
+  db:
+    image: postgres:11-alpine
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+
+  server_app:
+    build: .
+    command: bundle exec rails server -b 0.0.0.0
+    entrypoint: ./docker-entrypoint.sh
+    volumes:
+      - .:/home/www/ruby_page_object_webinar
+    tty: true
+    stdin_open: true
+    environment: &server_app_env
+      POSTGRES_HOST: db
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    healthcheck:
+      test: ["CMD", "http", "GET", "localhost:3000"]

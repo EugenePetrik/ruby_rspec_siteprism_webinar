@@ -1,0 +1,105 @@
+version: 2.1
+
+executors:
+  default:
+    working_directory: ~/univ_app
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+      - image: circleci/postgres:11.3-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: univ_app_test
+
+caches: 
+  - &full_gem_cache gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+  - &gem_cache gem-cache
+
+commands:
+  setup_gems:
+    description: Setup bundler and other gems
+    steps:
+      - restore_cache:
+          keys:
+            - *full_gem_cache
+            - *gem_cache
+      - run:
+          name: Install Bundler
+          command: gem install bundler
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - save_cache:
+          key: *full_gem_cache
+          paths:
+            - ~/univ_app/vendor/bundle
+
+  setup_databases:
+    steps:
+      - run:
+          name: Install postgresql client
+          shell: /bin/sh
+          command: |
+            sudo apt-get -t stable install postgresql-client --fix-missing
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:create db:migrate --trace
+            
+  run_specs:
+    steps:
+      - run: 
+          name: Run feature specs
+          environment:
+            - RAILS_ENV: test
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --profile \
+                              --order random \
+                              --format documentation \
+                              --fail-fast \
+                              --format html \
+                              --out reports/rspec_results.html \
+                              -- \
+                              $TEST_FILES
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: ~/univ_app/coverage
+          destination: coverage
+      - store_artifacts:
+          path: ~/univ_app/reports
+          destination: rspec_reports
+      - store_artifacts:
+          path: ~/univ_app/tmp/capybara
+          destination: capybara_screenshot
+      - store_artifacts:
+          path: ~/univ_app/tmp/logs
+          destination: logs
+
+jobs:
+  e2e:
+    executor: default
+    environment:
+      - RAILS_ENV: test
+    steps:
+      - checkout
+      - setup_gems
+      - setup_databases
+      - run_specs
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - e2e
