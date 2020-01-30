@@ -33,13 +33,12 @@ RSpec.describe 'View Profile page' do
     end
 
     it 'course links are displayed' do
-      expect(view_profile_page.course_links.size).to eq(3)
+      expect(view_profile_page).to have_course_links(count: 3)
     end
 
     it 'course names match' do
       course = Course.all
-      expect(view_profile_page.courses_links)
-        .to match_array([course[0].name, course[1].name, course[2].name])
+      expect(view_profile_page.courses_links).to match_array([course[0].name, course[1].name, course[2].name])
     end
   end
 

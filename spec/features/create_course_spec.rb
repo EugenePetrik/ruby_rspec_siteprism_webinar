@@ -45,6 +45,7 @@ RSpec.describe 'Create Course page' do
 
       # expect(view_course_page.flash_message.text).to eq(I18n.t('success_create', course_name: course_name))
       expect(view_course_page.flash_message.text).to eq("You have successfully create #{course_name}!")
+      
       expect(view_course_page.course_title.text).to eq(course_name)
       expect(view_course_page.course_description.text).to eq(course_description)
     end

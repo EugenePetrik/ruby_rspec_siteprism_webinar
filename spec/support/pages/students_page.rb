@@ -1,22 +1,16 @@
 # frozen_string_literal: true
 
+require_relative 'sections/student_section'
+
 class StudentsPage < BasePage
   set_url '/students'
 
-  STUDENT_CARD_SELECTOR = 'data-qa'
-
   element :student_title, 'h3.center-align'
-  elements :student_cards, "div[#{STUDENT_CARD_SELECTOR}]"
-  elements :student_names, 'span.card-title'
 
-  expected_elements :student_title
+  sections :students, ::StudentSection, 'div[data-qa]'
 
-  def students_cards_ids
-    student_cards.map { |student| student[STUDENT_CARD_SELECTOR].to_i }
-  end
-
-  def students_names
-    student_names.map(&:text)
+  def student_names    
+    students.map(&:name).map(&:text)
   end
 
   def open_student_profile_for(student_id)

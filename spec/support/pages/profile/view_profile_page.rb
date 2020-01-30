@@ -9,6 +9,7 @@ class ViewProfilePage < BasePage
   element :user_email, :xpath, '(//span[@class="card-title"]/following-sibling::p)[1]'
   element :edit_profile_button, 'a.waves-effect'
   element :course_enroll_title, :xpath, '(//span[@class="card-title"])[2]'
+  
   elements :course_links, "li[#{COURSE_LINK_SELECTOR}] a"
 
   expected_elements :user_name, :user_email, :edit_profile_button, :course_enroll_title

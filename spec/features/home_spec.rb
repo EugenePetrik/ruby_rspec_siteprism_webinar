@@ -31,17 +31,11 @@ RSpec.describe 'Home page' do
     end
 
     it 'course cards are displayed' do
-      expect(home_page.course_cards.size).to eq(3)
-    end
-
-    it 'course cards ids match' do
-      expect(home_page.courses_cards_ids)
-        .to eq([course[0].id, course[1].id, course[2].id])
+      expect(home_page).to have_courses(count: 3)
     end
 
     it 'course titles match' do
-      expect(home_page.courses_titles)
-        .to match_array([course[0].name, course[1].name, course[2].name])
+      expect(home_page.course_titles).to match_array([course[0].name, course[1].name, course[2].name])
     end
   end
 
@@ -70,6 +64,7 @@ RSpec.describe 'Home page' do
 
       expect(view_course_page).to be_displayed
       expect(view_course_page).to be_all_there
+
       expect(view_course_page.course_title.text).to eq(course[0].name)
       expect(view_course_page.course_description.text).to eq(course[0].description)
     end

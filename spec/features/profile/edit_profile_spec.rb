@@ -44,8 +44,10 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       expect(view_profile_page).to be_displayed(student_id: student.id)
       expect(view_profile_page).to be_all_there
+
       expect(view_profile_page).to have_content('You have successfully updated your profile')
       # expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
+
       expect(view_profile_page.user_name.text).to eq(params_student_data[:name])
       expect(view_profile_page.user_email.text).to eq(params_student_data[:email])
     end
@@ -57,6 +59,7 @@ RSpec.describe 'Edit Profile page', type: :feature do
 
       expect(view_profile_page).to have_content('You have successfully updated your profile')
       # expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
+      
       expect(view_profile_page.user_name.text).to eq(params_student_data[:name])
       expect(view_profile_page.user_email.text).to eq(params_student_data[:email])
     end

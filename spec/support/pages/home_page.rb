@@ -1,22 +1,16 @@
 # frozen_string_literal: true
 
+require_relative 'sections/course_section'
+
 class HomePage < BasePage
   set_url '/'
 
-  COURSE_CARD_SELECTOR = 'data-qa'
-
   element :course_title, 'h3.center-align'
-  elements :course_cards, "div[#{COURSE_CARD_SELECTOR}]"
-  elements :course_titles, 'span.card-title'
 
-  expected_elements :course_title
+  sections :courses, ::CourseSection, 'div[data-qa]'
 
-  def courses_cards_ids
-    course_cards.map { |course| course[COURSE_CARD_SELECTOR].to_i }
-  end
-
-  def courses_titles
-    course_titles.map(&:text)
+  def course_titles
+    courses.map(&:title).map(&:text)
   end
 
   def course_enroll_with(course_id)

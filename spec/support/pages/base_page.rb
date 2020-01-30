@@ -3,9 +3,9 @@
 class BasePage < SitePrism::Page
   # Navigation
   element :brand_title, 'a.brand-logo'
-  element :courses, :xpath, '(//a[text()="Courses"])[1]'
-  element :students, :xpath, '(//a[text()="Students"])[1]'
-  element :account, 'a[data-target="dropdown1"]'
+  element :courses_link, :xpath, '(//a[text()="Courses"])[1]'
+  element :students_link, :xpath, '(//a[text()="Students"])[1]'
+  element :account_link, 'a[data-target="dropdown1"]'
 
   # Footer
   element :brand_footer, :xpath, '//h5[text()="Tech University"]'
@@ -19,11 +19,11 @@ class BasePage < SitePrism::Page
   element :flash_message, 'span.white-text'
 
   def nav_bar_visible?
-    all_visible?(:brand_title, :courses)
+    all_visible?(:brand_title, :courses_link)
   end
 
   def nav_bar_login_user_visible?
-    all_visible?(:brand_title, :courses, :students, :account)
+    all_visible?(:brand_title, :courses_link, :students_link, :account_link)
   end
 
   def footer_visible?
