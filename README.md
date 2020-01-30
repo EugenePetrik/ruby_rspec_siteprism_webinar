@@ -1,7 +1,7 @@
 ## This project has been prepared for the webinar.
 ## We use the following tools, such as **Ruby**, **Capybara**, **SitePrism**, and **RSpec**.
 
-[![CircleCI](https://circleci.com/gh/EugenePetrik/ruby_page_object_webinar/tree/master.svg?style=svg)](https://circleci.com/gh/EugenePetrik/ruby_page_object_webinar/tree/master)
+[![CircleCI](https://circleci.com/gh/EugenePetrik/ruby_rspec_siteprism_webinar/tree/master.svg?style=svg)](https://circleci.com/gh/EugenePetrik/ruby_rspec_siteprism_webinar/tree/master)
 
 #### Install Postgres for Ubuntu
 
