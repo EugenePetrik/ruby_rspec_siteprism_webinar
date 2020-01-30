@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'sections/course_section'
+require_relative '../sections/course_section'
 
 class HomePage < BasePage
   set_url '/'
