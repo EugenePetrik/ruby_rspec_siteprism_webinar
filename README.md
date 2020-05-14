@@ -7,6 +7,12 @@
 
 [Setup Postgres for Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04)
 
+Create user for Postgresql:
+
+```shell
+sudo -u postgres createuser --superuser user_name
+```
+
 #### Install Postgres for Mac
 
 [Setup Postgres for Mac](https://www.codementor.io/@engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb)
